@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" name="instrument" size="891,537" id="com.tr1.instrument" metadata="uml2-1.0" initialized="true" tag="10" key="32303037303533312D313020747231">
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.3/@sourceConnections.0 //@children.3/@sourceConnections.1 //@children.1/@sourceConnections.2" name="Price" location="435,78" size="119,103" id="com.tr1.instrument/Price" runTimeClassModel="price,timeStamp,Price(DLjava.util.Date;)">
+    <children xsi:type="editmodel:CompartmentEditModel" size="96,36">
+      <children xsi:type="editmodel:AttributeEditModel" name="price" id="com.tr1.instrument/Price#price"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="timeStamp" id="com.tr1.instrument/Price#timeStamp"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="54,18">
+      <children xsi:type="editmodel:MethodEditModel" name="Price" id="com.tr1.instrument/Price#Price(DLjava.util.Date;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.2/@sourceConnections.0 //@children.2/@sourceConnections.2" name="MeanInstrument" location="158,180" size="144,139" id="com.tr1.instrument/MeanInstrument" runTimeClassModel="calculateMean(),upOrDown(),MeanInstrument(Ljava.util.List;),calculateMargin(),absoluteStrength()">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="112,90">
+      <children xsi:type="editmodel:MethodEditModel" name="MeanInstrument" id="com.tr1.instrument/MeanInstrument#MeanInstrument(Ljava.util.List;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="absoluteStrength" id="com.tr1.instrument/MeanInstrument#absoluteStrength()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="calculateMargin" id="com.tr1.instrument/MeanInstrument#calculateMargin()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="calculateMean" id="com.tr1.instrument/MeanInstrument#calculateMean()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="upOrDown" id="com.tr1.instrument/MeanInstrument#upOrDown()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="com.tr1.instrument/Instrument&lt;-com.tr1.instrument/MeanInstrument" source="//@children.1" target="//@children.3" targetEnd="//@children.1/@sourceConnections.0/@children.1" sourceEnd="//@children.1/@sourceConnections.0/@children.0" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="71,0" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="54,67"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="com.tr1.instrument/MeanInstrument->com.tr1.instrument/Instrument" source="//@children.1" target="//@children.3" targetEnd="//@children.1/@sourceConnections.1/@children.2" label="//@children.1/@sourceConnections.1/@children.0" sourceEnd="//@children.1/@sourceConnections.1/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="91,0" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="74,67"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="com.tr1.instrument/MeanInstrument->com.tr1.instrument/Price*com.tr1.instrument/MeanInstrument-Soyatec::Import->com.tr1.instrument/Price" source="//@children.1" target="//@children.0" targetEnd="//@children.1/@sourceConnections.2/@children.2" label="//@children.1/@sourceConnections.2/@children.0" sourceEnd="//@children.1/@sourceConnections.2/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import»" size="41,14" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="144,0" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,102"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="TriggeredMeanInstrument" location="127,375" size="205,139" id="com.tr1.instrument/TriggeredMeanInstrument" runTimeClassModel="TriggeredMeanInstrument(Ljava.util.List;),fiveDayTrigger(),tenDayTrigger(),twentyDayTrigger(),generateTrigger()">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="152,90">
+      <children xsi:type="editmodel:MethodEditModel" name="TriggeredMeanInstrument" id="com.tr1.instrument/TriggeredMeanInstrument#TriggeredMeanInstrument(Ljava.util.List;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="fiveDayTrigger" id="com.tr1.instrument/TriggeredMeanInstrument#fiveDayTrigger()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="generateTrigger" id="com.tr1.instrument/TriggeredMeanInstrument#generateTrigger()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="tenDayTrigger" id="com.tr1.instrument/TriggeredMeanInstrument#tenDayTrigger()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="twentyDayTrigger" id="com.tr1.instrument/TriggeredMeanInstrument#twentyDayTrigger()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="com.tr1.instrument/MeanInstrument&lt;-com.tr1.instrument/TriggeredMeanInstrument" source="//@children.2" target="//@children.1" targetEnd="//@children.2/@sourceConnections.0/@children.1" sourceEnd="//@children.2/@sourceConnections.0/@children.0" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="102,0" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="71,139"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="com.tr1.trigger/Trigger&lt;-com.tr1.instrument/TriggeredMeanInstrument" source="//@children.2" target="//@children.4" targetEnd="//@children.2/@sourceConnections.1/@children.1" sourceEnd="//@children.2/@sourceConnections.1/@children.0" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="205,31" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,131"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="com.tr1.instrument/TriggeredMeanInstrument->com.tr1.instrument/MeanInstrument*com.tr1.instrument/TriggeredMeanInstrument-Soyatec::Import->com.tr1.instrument/MeanInstrument*com.tr1.instrument/TriggeredMeanInstrument->com.tr1.instrument/MeanInstrument*com.tr1.instrument/TriggeredMeanInstrument->com.tr1.instrument/MeanInstrument*com.tr1.instrument/TriggeredMeanInstrument->com.tr1.instrument/MeanInstrument*com.tr1.instrument/TriggeredMeanInstrument->com.tr1.instrument/MeanInstrument*com.tr1.instrument/TriggeredMeanInstrument->com.tr1.instrument/MeanInstrument" source="//@children.2" target="//@children.1" targetEnd="//@children.2/@sourceConnections.2/@children.2" label="//@children.2/@sourceConnections.2/@children.0" sourceEnd="//@children.2/@sourceConnections.2/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import»" size="41,14" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="205,15" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="91,139"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.1/@sourceConnections.0 //@children.1/@sourceConnections.1" name="Instrument" location="175,45" size="109,67" id="com.tr1.instrument/Instrument" runTimeClassModel="Instrument(Ljava.util.List;)">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="80,18">
+      <children xsi:type="editmodel:MethodEditModel" name="Instrument" id="com.tr1.instrument/Instrument#Instrument(Ljava.util.List;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="com.tr1.instrument/Price@priceList+com.tr1.instrument/Instrument@" source="//@children.3" target="//@children.0" targetEnd="//@children.3/@sourceConnections.0/@children.2" label="//@children.3/@sourceConnections.0/@children.0" sourceEnd="//@children.3/@sourceConnections.0/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="109,50" id="com.tr1.instrument/Price@priceList+com.tr1.instrument/Instrument@|com.tr1.instrument/Instrument#" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="priceList" location="0,17" id="com.tr1.instrument/Price@priceList+com.tr1.instrument/Instrument@|com.tr1.instrument/Price#priceList" multiplicityLabel="//@children.3/@sourceConnections.0/@children.2/@children.1" roleLabel="//@children.3/@sourceConnections.0/@children.2/@children.0" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name=" # priceList" location="375,74" size="53,14" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="*" location="424,102" size="4,14" anchorKind="LastPart"/>
+      </children>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="com.tr1.instrument/Instrument-Soyatec::Import->com.tr1.instrument/Price" source="//@children.3" target="//@children.0" targetEnd="//@children.3/@sourceConnections.1/@children.2" label="//@children.3/@sourceConnections.1/@children.0" sourceEnd="//@children.3/@sourceConnections.1/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import»" size="41,14" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="104,67" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,54"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:InterfaceEditModel" targetConnections="//@children.2/@sourceConnections.1" name="Trigger" location="705,135" size="130,214" id="com.tr1.trigger/Trigger" runTimeClassModel="com.tr1.trigger.Trigger.Level,generateTrigger()">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="107,18">
+      <children xsi:type="editmodel:MethodEditModel" name="generateTrigger" id="com.tr1.trigger/Trigger#generateTrigger()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="94,109">
+      <children xsi:type="editmodel:EnumerationEditModel" targetConnections="//@children.4/@sourceConnections.0" name="Level" location="646,341" size="94,107" id="com.tr1.trigger/Trigger$Level" runTimeClassModel="MED%,HI%,LO%">
+        <children xsi:type="editmodel:CompartmentEditModel" size="40,54">
+          <children xsi:type="editmodel:EnumerationLiteralEditModel" name="MED" id="com.tr1.trigger/Trigger$Level#MED%"/>
+          <children xsi:type="editmodel:EnumerationLiteralEditModel" name="HI" id="com.tr1.trigger/Trigger$Level#HI%"/>
+          <children xsi:type="editmodel:EnumerationLiteralEditModel" name="LO" id="com.tr1.trigger/Trigger$Level#LO%"/>
+        </children>
+        <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+      </children>
+    </children>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="com.tr1.trigger/Trigger-Soyatec::Import->com.tr1.trigger/Trigger$Level" source="//@children.4" target="//@children.4/@children.2/@children.0" targetEnd="//@children.4/@sourceConnections.0/@children.2" label="//@children.4/@sourceConnections.0/@children.0" sourceEnd="//@children.4/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import»" size="41,14" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="130,137" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,32"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <diagramOptions xsi:type="options:ClassDiagramOptions" level="-1" properties="wireOptions=7;Product=eUML2"/>
+  <boardSetting snapToGeometry="true" gridEnabled="true" gridSpacing="15,15" gridOrigin="0,0" rulerUnit="pixel" gridVisibility="false">
+    <leftRuler/>
+    <topRuler/>
+  </boardSetting>
+  <classDiagramPreferences xsi:type="editmodel:UMLClassDiagramPreference" showPopupBars="true" showConnectionHandles="true" attributeSorter="Natural" methodSorter="Natural" showClassStereotype="true" showPackageStereotype="true" showDependencyStereotype="true" showInterfaceStereotype="true" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+</editmodel:ClassDiagramEditModel>
