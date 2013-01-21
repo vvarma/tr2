@@ -31,22 +31,30 @@ public class Application extends Controller {
 		Set<String> requestParamsKeys = requestParams.keySet();
 		Calendar startDate = new GregorianCalendar();
 		Calendar endDate = new GregorianCalendar();
-		String instrCategory="";
-		SimpleDateFormat formatter=new SimpleDateFormat("dd/mm/yyyy");
+		String instrCategory = "";
+		SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
 		for (String paramsKey : requestParamsKeys) {
 			if (paramsKey.equals("strtDate")) {
-				startDate.setTime(formatter.parse(requestParams.get(paramsKey)[0])) ;
+				startDate
+						.setTime(formatter.parse(requestParams.get(paramsKey)[0]));
 			} else if (paramsKey.equals("endDate")) {
-				endDate.setTime(formatter.parse(requestParams.get(paramsKey)[0])) ;
+				System.out.println(requestParams.get(paramsKey)[0]);
+				endDate.setTime(formatter.parse(requestParams.get(paramsKey)[0]));
 			} else if (paramsKey.equals("category")) {
 				instrCategory = requestParams.get(paramsKey)[0];
 			}
 		}
 
-		Map<String, Instrument> resultMap=DownloadZipInstrument.getInstrumentGivenDateAndName(startDate, endDate,
-				instrCategory);
+		/*
+		 * System.out.println(startDate); System.out.println(endDate);
+		 * System.out.println(instrCategory);
+		 */
+
+		Map<String, Instrument> resultMap = DownloadZipInstrument
+				.getInstrumentGivenDateAndName(startDate, endDate,
+						instrCategory);
 		
 		return ok(new Gson().toJson(resultMap));
-
+		// return ok();
 	}
 }

@@ -80,7 +80,7 @@ public class DownloadZip {
 	         * Setup a buffered file writer to write
 	         * out what we read from the website.
 	         */
-	        FileOutputStream writer = new FileOutputStream("temp/temp.zip");
+	        FileOutputStream writer = new FileOutputStream("C:\\Users\\Vinay\\workspace\\tr2\\temp2\\temp.zip");
 	        byte[] buffer = new byte[153600];
 	        int totalBytesRead = 0;
 	        int bytesRead = 0;

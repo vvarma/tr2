@@ -35,7 +35,7 @@ public class DownloadZipInstrument {
 		ExtractZipFile extractZip = new ExtractZipFile();
 
 		for (Calendar i = startDate; i.before(endDate); i.add(Calendar.DATE, 1)) {
-			String fileName = "data/";
+			String fileName = "C://Users//Vinay//workspace//tr2//data//";
 			if (isWeekDay(i)) {
 				url = createUrlGivenDate(i);
 				dwnlder.downloadZip(url);
@@ -57,11 +57,12 @@ public class DownloadZipInstrument {
 		Map<String, Instrument> instrumentList = new HashMap<String, Instrument>();
 
 		for (String i : symbolList) {
-			instrumentList.put(i, new MACDInstrument(i));
+			//instrumentList.put(i, new MACDInstrument(i));
+			instrumentList.put(i, new Instrument(i));
 		}
 
 		for (Calendar i = startDate; i.before(endDate); i.add(Calendar.DATE, 1)) {
-			String fileName = "data/";
+			String fileName = "C://Users//Vinay//workspace//tr2//data//";
 			if (isWeekDay(i)) {
 				String genFileName = createFilenamGivenDate(i);
 				File file = new File(fileName + genFileName);

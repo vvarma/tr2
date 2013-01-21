@@ -44,7 +44,7 @@ public class ExtractZipFile {
 		while (zentry != null) {
 			 entryName = zentry.getName();
 			System.out.println("Name of  Zip Entry : " + entryName);
-			FileOutputStream outstream = new FileOutputStream("data/"+entryName);
+			FileOutputStream outstream = new FileOutputStream("C://Users//Vinay//workspace//tr2//data//"+entryName);
 			int n;
 
 			while ((n = zinstream.read(buf, 0, 1024)) > -1) {
