@@ -1,0 +1,2 @@
+
+falseTrigMACDInstrument [upOrDown=false, priceList=Price [timeStamp=Thu Mar 29 00:00:00 PDT 2012, price=679.45], instrumentName=M&M]

@@ -14,6 +14,7 @@ import java.util.Map;
 import com.tr2.instrument.Instrument;
 import com.tr2.instrument.Price;
 import com.tr2.instrument.TrigMACDInstrument;
+import com.tr2.observer.ObserveTrigMACDInstrument;
 import com.tr2.reader.ReadPriceCsv;
 import com.tr2.webtry.DownloadZip;
 import com.tr2.webtry.ExtractZipFile;
@@ -55,9 +56,11 @@ public class DownloadZipInstrument {
 		List<String> symbolList = loadInterestedSymbols(symbolGroup);
 
 		Map<String, Instrument> instrumentList = new HashMap<String, Instrument>();
-
+		ObserveTrigMACDInstrument obs=new ObserveTrigMACDInstrument();
 		for (String i : symbolList) {
-			instrumentList.put(i, new TrigMACDInstrument(i));
+			TrigMACDInstrument tr=new TrigMACDInstrument(i);
+			instrumentList.put(i, tr);
+			tr.addObserver(obs);
 			//instrumentList.put(i, new Instrument(i));
 		}
 
