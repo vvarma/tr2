@@ -13,8 +13,8 @@ import play.mvc.Result;
 import views.html.index;
 
 import com.google.gson.Gson;
-import com.tr1.instrument.Instrument;
-import com.tr1.util.DownloadZipInstrument;
+import com.tr2.instrument.Instrument;
+import com.tr2.util.DownloadZipInstrument;
 
 public class Application extends Controller {
 
