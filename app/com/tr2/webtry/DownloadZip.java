@@ -6,6 +6,8 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import play.Logger;
+
 public class DownloadZip {
 
 	/**
@@ -70,7 +72,7 @@ public class DownloadZip {
 	         */
 	        long startTime = System.currentTimeMillis();
 	 
-	        System.out.println("Connecting to NSE...\n");
+	        Logger.info("Connecting to NSE...\n");
 	 
 	        URL url = new URL(urlFormed);
 	        url.openConnection();
@@ -80,12 +82,12 @@ public class DownloadZip {
 	         * Setup a buffered file writer to write
 	         * out what we read from the website.
 	         */
-	        FileOutputStream writer = new FileOutputStream("C:\\Users\\Vinay\\workspace\\tr2\\temp2\\temp.zip");
+	        FileOutputStream writer = new FileOutputStream(IConstants.TEMP_PATH);
 	        byte[] buffer = new byte[153600];
 	        int totalBytesRead = 0;
 	        int bytesRead = 0;
 	 
-	        System.out.println("Reading ZIP file 150KB blocks at a time.\n");
+	       Logger.info("Reading ZIP file 150KB blocks at a time.\n");
 	 
 	        while ((bytesRead = reader.read(buffer)) > 0)
 	        {  
@@ -96,7 +98,7 @@ public class DownloadZip {
 	 
 	        long endTime = System.currentTimeMillis();
 	 
-	        System.out.println("Done. " + (new Integer(totalBytesRead).toString()) + " bytes read (" + (new Long(endTime - startTime).toString()) + " millseconds).\n");
+	        Logger.info("Done. " + (new Integer(totalBytesRead).toString()) + " bytes read (" + (new Long(endTime - startTime).toString()) + " millseconds).\n");
 	        writer.close();
 	        reader.close();
 	     }

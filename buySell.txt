@@ -1,2 +1,6 @@
 
-falseTrigMACDInstrument [upOrDown=false, priceList=Price [timeStamp=Thu Mar 29 00:00:00 PDT 2012, price=679.45], instrumentName=M&M]
+trueTrigMACDInstrument [upOrDown=true, priceList=Price [timeStamp=Wed Feb 08 00:00:00 IST 2012, price=686.95], instrumentName=M&M]
+trueTrigMACDInstrument [upOrDown=true, priceList=Price [timeStamp=Thu Feb 09 00:00:00 IST 2012, price=1701.7], instrumentName=BAJAJ-AUTO]
+trueTrigMACDInstrument [upOrDown=true, priceList=Price [timeStamp=Thu Feb 09 00:00:00 IST 2012, price=1993.85], instrumentName=HEROMOTOCO]
+falseTrigMACDInstrument [upOrDown=false, priceList=Price [timeStamp=Tue Mar 20 00:00:00 IST 2012, price=41.8], instrumentName=TVSMOTOR]
+falseTrigMACDInstrument [upOrDown=false, priceList=Price [timeStamp=Thu Mar 29 00:00:00 IST 2012, price=679.45], instrumentName=M&M]

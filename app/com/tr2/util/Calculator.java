@@ -19,7 +19,7 @@ public class Calculator {
 		for (Price p : instrument.getPriceList())
 			result += p.getPrice();
 		result /= instrument.getPriceList().size();
-		System.out.println(result + "result");
+		//System.out.println(result + "result");
 		return result;
 	}
 
@@ -38,7 +38,7 @@ public class Calculator {
 			mean = (p.getPrice() - mean) * multiplier + mean;
 		}
 
-		System.out.println(mean + "result");
+		//System.out.println(mean + "result");
 		return mean;
 	}
 }

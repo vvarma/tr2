@@ -1,5 +1,7 @@
 package com.tr2.instrument;
 
+import play.Logger;
+
 public class TrigMACDInstrument extends MACDInstrument {
 
 	protected boolean upOrDown;
@@ -23,14 +25,15 @@ public class TrigMACDInstrument extends MACDInstrument {
 			if (macdList.get(index - 1) <= 0 && macdList.get(index) > 0) {
 				upOrDown = true;
 				setChanged();
-				
 				notifyObservers(upOrDown);
+				Logger.info("Should notify");
 
 			}
 			if (macdList.get(index - 1) >= 0 && macdList.get(index) < 0) {
 				upOrDown = false;
 				setChanged();
 				notifyObservers(upOrDown);
+				Logger.info("Should notify");
 
 			}
 		}

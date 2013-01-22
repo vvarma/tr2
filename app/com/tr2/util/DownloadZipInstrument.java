@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import play.Logger;
+
 import com.tr2.instrument.Instrument;
 import com.tr2.instrument.Price;
 import com.tr2.instrument.TrigMACDInstrument;
@@ -18,61 +20,36 @@ import com.tr2.observer.ObserveTrigMACDInstrument;
 import com.tr2.reader.ReadPriceCsv;
 import com.tr2.webtry.DownloadZip;
 import com.tr2.webtry.ExtractZipFile;
+import com.tr2.webtry.IConstants;
 
 public class DownloadZipInstrument {
-
-	/**
-	 * @param args
-	 */
-
-	public static void getInstrumentGivenDateAndName(Calendar startDate,
-			Calendar endDate) throws IOException {
-		// TODO Auto-generated method stub
-		String url;
-		DownloadZip dwnlder = new DownloadZip();
-		// List<Instrument> instrumentList=new ArrayList<Instrument>();
-		Instrument instr = new Instrument("ACC");
-		// instrumentList.add(new Instrument("ACC"));
-		ExtractZipFile extractZip = new ExtractZipFile();
-
-		for (Calendar i = startDate; i.before(endDate); i.add(Calendar.DATE, 1)) {
-			String fileName = "C://Users//Vinay//workspace//tr2//data//";
-			if (isWeekDay(i)) {
-				url = createUrlGivenDate(i);
-				dwnlder.downloadZip(url);
-				fileName = fileName + extractZip.extractTemp();
-				Price instrPrice = new Price(ReadPriceCsv.readPrice(fileName,
-						"ACC"), i.getTime());
-				instr.addPrice(instrPrice);
-			}
-
-		}
-		System.out.println(instr);
-	}
 
 	public static Map<String, Instrument> getInstrumentGivenDateAndName(
 			Calendar startDate, Calendar endDate, String symbolGroup)
 			throws IOException {
+		Logger.info("application started ..");
 		List<String> symbolList = loadInterestedSymbols(symbolGroup);
 
 		Map<String, Instrument> instrumentList = new HashMap<String, Instrument>();
-		ObserveTrigMACDInstrument obs=new ObserveTrigMACDInstrument();
+		ObserveTrigMACDInstrument obs = new ObserveTrigMACDInstrument();
 		for (String i : symbolList) {
-			TrigMACDInstrument tr=new TrigMACDInstrument(i);
+			TrigMACDInstrument tr = new TrigMACDInstrument(i);
 			instrumentList.put(i, tr);
 			tr.addObserver(obs);
-			//instrumentList.put(i, new Instrument(i));
+			// instrumentList.put(i, new Instrument(i));
 		}
 
 		for (Calendar i = startDate; i.before(endDate); i.add(Calendar.DATE, 1)) {
-			String fileName = "C://Users//Vinay//workspace//tr2//data//";
+			String fileName = IConstants.DATA_PATH;
+
 			if (isWeekDay(i)) {
 				String genFileName = createFilenamGivenDate(i);
 				File file = new File(fileName + genFileName);
 				if (file.exists()) {
-					System.out.println(genFileName + " exists!");
+					Logger.trace(genFileName + " exists!");
 					fileName = fileName + genFileName;
 				} else {
+					Logger.trace("downloader called.. ");
 					fileName = fileName
 							+ createUrlDownloadAndExtractFileGivenDate(i);
 				}
@@ -86,8 +63,34 @@ public class DownloadZipInstrument {
 			}
 
 		}
-		System.out.println(instrumentList);
+		obs.close();
 		return instrumentList;
+	}
+
+	public static void getInstrumentGivenDateAndName(Calendar startDate,
+			Calendar endDate) throws IOException {
+		// TODO Auto-generated method stub
+		String url;
+		DownloadZip dwnlder = new DownloadZip();
+		// List<Instrument> instrumentList=new ArrayList<Instrument>();
+		Instrument instr = new Instrument("ACC");
+		// instrumentList.add(new Instrument("ACC"));
+		ExtractZipFile extractZip = new ExtractZipFile();
+
+		for (Calendar i = startDate; i.before(endDate); i.add(Calendar.DATE, 1)) {
+
+			String fileName = IConstants.DATA_PATH;
+			if (isWeekDay(i)) {
+				url = createUrlGivenDate(i);
+				dwnlder.downloadZip(url);
+				fileName = fileName + extractZip.extractTemp();
+				Price instrPrice = new Price(ReadPriceCsv.readPrice(fileName,
+						"ACC"), i.getTime());
+				instr.addPrice(instrPrice);
+			}
+
+		}
+		System.out.println(instr);
 	}
 
 	private static boolean isWeekDay(Calendar i) {
@@ -107,7 +110,6 @@ public class DownloadZipInstrument {
 		 */
 		StringBuilder urlBuilder = new StringBuilder(
 				"http://www.nseindia.com/content/historical/EQUITIES/");
-		// urlBuilder.append("20");
 		urlBuilder.append(i.get(Calendar.YEAR));
 		urlBuilder.append("/");
 		urlBuilder.append(i.getDisplayName(Calendar.MONTH, Calendar.SHORT,
@@ -119,10 +121,9 @@ public class DownloadZipInstrument {
 		urlBuilder.append(i.get(Calendar.DATE));
 		urlBuilder.append(i.getDisplayName(Calendar.MONTH, Calendar.SHORT,
 				Locale.US).toUpperCase());
-		// urlBuilder.append("20");
 		urlBuilder.append(i.get(Calendar.YEAR));
 		urlBuilder.append("bhav.csv.zip");
-		System.out.println(urlBuilder.toString());
+		Logger.trace(urlBuilder.toString());
 		return urlBuilder.toString();
 	}
 

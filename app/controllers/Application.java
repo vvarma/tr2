@@ -45,15 +45,12 @@ public class Application extends Controller {
 			}
 		}
 
-		/*
-		 * System.out.println(startDate); System.out.println(endDate);
-		 * System.out.println(instrCategory);
-		 */
+		
 
 		Map<String, Instrument> resultMap = DownloadZipInstrument
 				.getInstrumentGivenDateAndName(startDate, endDate,
 						instrCategory);
-		
+		//System.out.println(resultMap);
 		return ok(new Gson().toJson(resultMap));
 		// return ok();
 	}
