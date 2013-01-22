@@ -1,9 +1,12 @@
 package com.tr2.util;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -14,6 +17,7 @@ import java.util.Map;
 import play.Logger;
 
 import com.tr2.instrument.Instrument;
+import com.tr2.instrument.MACDInstrument;
 import com.tr2.instrument.Price;
 import com.tr2.instrument.TrigMACDInstrument;
 import com.tr2.observer.ObserveTrigMACDInstrument;
@@ -66,7 +70,55 @@ public class DownloadZipInstrument {
 		obs.close();
 		return instrumentList;
 	}
+	public static  Instrument getSingleInstrumentGivenDateAndName(
+			Calendar startDate, Calendar endDate, String symbol)
+			throws IOException {
+		Logger.info("application started ..");
+		
 
+		MACDInstrument instrument =  new TrigMACDInstrument(symbol);
+		ObserveTrigMACDInstrument obs = new ObserveTrigMACDInstrument();
+		instrument.addObserver(obs);
+
+		for (Calendar i = startDate; i.before(endDate); i.add(Calendar.DATE, 1)) {
+			String fileName = IConstants.DATA_PATH;
+
+			if (isWeekDay(i)) {
+				String genFileName = createFilenamGivenDate(i);
+				File file = new File(fileName + genFileName);
+				if (file.exists()) {
+					Logger.trace(genFileName + " exists!");
+					fileName = fileName + genFileName;
+				} else {
+					Logger.trace("downloader called.. ");
+					fileName = fileName
+							+ createUrlDownloadAndExtractFileGivenDate(i);
+				}
+
+				
+					Price instrPrice = new Price(ReadPriceCsv.readPrice(
+							fileName, symbol), i.getTime());
+					instrument.addPrice(instrPrice);
+				}
+
+			}
+		exportToCSV(instrument);
+		
+		//obs.close();
+		return instrument;
+	}
+
+	private static void exportToCSV(MACDInstrument instrument) throws IOException {
+		//BufferedWriter bw=new BufferedWriter(new FileWriter(new File("price.csv")));
+		PrintWriter pw=new PrintWriter(new File("price.csv"));
+		for(Price p:instrument.getPriceList()){
+			int index=instrument.getPriceList().indexOf(p);
+			pw.print(p.getPrice()+","+instrument.getMacdList().get(index));
+			pw.print('\n');
+		}
+		pw.close();
+		
+	}
 	public static void getInstrumentGivenDateAndName(Calendar startDate,
 			Calendar endDate) throws IOException {
 		// TODO Auto-generated method stub

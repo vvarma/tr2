@@ -29,7 +29,7 @@ public class Instrument extends Observable{
 
 	@Override
 	public String toString() {
-		return "Instrument [priceList=" + priceList + ", instrumentName="
+		return "Instrument [priceList=" + priceList.get(priceList.size()-1) + ", instrumentName="
 				+ instrumentName + "]";
 	}
 

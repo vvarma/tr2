@@ -54,4 +54,32 @@ public class Application extends Controller {
 		return ok(new Gson().toJson(resultMap));
 		// return ok();
 	}
+	public static Result singleInstrument() throws IOException, ParseException {
+		Map<String, String[]> requestParams = request().queryString();
+		Set<String> requestParamsKeys = requestParams.keySet();
+		Calendar startDate = new GregorianCalendar();
+		Calendar endDate = new GregorianCalendar();
+		String symbol = "";
+		SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+		for (String paramsKey : requestParamsKeys) {
+			if (paramsKey.equals("strtDate")) {
+				startDate
+						.setTime(formatter.parse(requestParams.get(paramsKey)[0]));
+			} else if (paramsKey.equals("endDate")) {
+				System.out.println(requestParams.get(paramsKey)[0]);
+				endDate.setTime(formatter.parse(requestParams.get(paramsKey)[0]));
+			} else if (paramsKey.equals("symbol")) {
+				symbol = requestParams.get(paramsKey)[0];
+			}
+		}
+
+		
+
+		Instrument result = DownloadZipInstrument
+				.getSingleInstrumentGivenDateAndName(startDate, endDate,
+						symbol);
+		//System.out.println(resultMap);
+		return ok(new Gson().toJson(result));
+		// return ok();
+	}
 }

@@ -1,6 +1,8 @@
 
-trueTrigMACDInstrument [upOrDown=true, priceList=Price [timeStamp=Wed Feb 08 00:00:00 IST 2012, price=686.95], instrumentName=M&M]
-trueTrigMACDInstrument [upOrDown=true, priceList=Price [timeStamp=Thu Feb 09 00:00:00 IST 2012, price=1701.7], instrumentName=BAJAJ-AUTO]
-trueTrigMACDInstrument [upOrDown=true, priceList=Price [timeStamp=Thu Feb 09 00:00:00 IST 2012, price=1993.85], instrumentName=HEROMOTOCO]
-falseTrigMACDInstrument [upOrDown=false, priceList=Price [timeStamp=Tue Mar 20 00:00:00 IST 2012, price=41.8], instrumentName=TVSMOTOR]
-falseTrigMACDInstrument [upOrDown=false, priceList=Price [timeStamp=Thu Mar 29 00:00:00 IST 2012, price=679.45], instrumentName=M&M]
+SELL TrigMACDInstrument [upOrDown=false, priceList=Price [timeStamp=Thu Apr 05 00:00:00 IST 2012, price=101.0], instrumentName=AMTEKAUTO]
+BUY TrigMACDInstrument [upOrDown=true, priceList=Price [timeStamp=Thu Jul 05 00:00:00 IST 2012, price=114.6], instrumentName=AMTEKAUTO]
+SELL TrigMACDInstrument [upOrDown=false, priceList=Price [timeStamp=Wed Jul 18 00:00:00 IST 2012, price=102.15], instrumentName=AMTEKAUTO]
+SELL TrigMACDInstrument [upOrDown=false, priceList=Price [timeStamp=Thu Apr 05 00:00:00 IST 2012, price=101.0], instrumentName=AMTEKAUTO]
+BUY TrigMACDInstrument [upOrDown=true, priceList=Price [timeStamp=Thu Jul 05 00:00:00 IST 2012, price=114.6], instrumentName=AMTEKAUTO]
+SELL TrigMACDInstrument [upOrDown=false, priceList=Price [timeStamp=Wed Jul 18 00:00:00 IST 2012, price=102.15], instrumentName=AMTEKAUTO]
+BUY TrigMACDInstrument [upOrDown=true, priceList=Price [timeStamp=Fri Dec 21 00:00:00 IST 2012, price=84.1], instrumentName=AMTEKAUTO]
