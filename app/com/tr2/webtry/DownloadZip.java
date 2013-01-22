@@ -32,7 +32,7 @@ public class DownloadZip {
 	         * Setup a buffered file writer to write
 	         * out what we read from the website.
 	         */
-	        FileOutputStream writer = new FileOutputStream("D:/worskpace/tr1/temp2/temp.zip");
+	        FileOutputStream writer = new FileOutputStream(IConstants.TEMP_PATH);
 	        byte[] buffer = new byte[153600];
 	        int totalBytesRead = 0;
 	        int bytesRead = 0;

@@ -19,7 +19,7 @@ public class TrigMACDInstrument extends MACDInstrument {
 
 	}
 
-	private void checkIndicator() {
+	/*private void checkIndicator() {
 		int index = macdList.size() - 1;
 		if (index > bigPeriod) {
 			if (macdList.get(index - 1) <= 0 && macdList.get(index) > 0) {
@@ -30,6 +30,27 @@ public class TrigMACDInstrument extends MACDInstrument {
 
 			}
 			if (macdList.get(index - 1) >= 0 && macdList.get(index) < 0) {
+				upOrDown = false;
+				setChanged();
+				notifyObservers(upOrDown);
+				Logger.info("Should notify");
+
+			}
+		}
+		
+
+	}*/
+	private void checkIndicator() {
+		int index = macdList.size() ;
+		if (index > bigPeriod+macdPeriod-1) {
+			if (upOrDown==false&&macdList.get(index-1)>emaMACDList.get(index-1)) {
+				upOrDown = true;
+				setChanged();
+				notifyObservers(upOrDown);
+				Logger.info("Should notify");
+
+			}
+			if (upOrDown==true&&macdList.get(index-1)<emaMACDList.get(index-1)) {
 				upOrDown = false;
 				setChanged();
 				notifyObservers(upOrDown);

@@ -1,10 +1,8 @@
 package com.tr2.util;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -76,7 +74,7 @@ public class DownloadZipInstrument {
 		Logger.info("application started ..");
 		
 
-		MACDInstrument instrument =  new TrigMACDInstrument(symbol);
+		TrigMACDInstrument instrument =  new TrigMACDInstrument(symbol);
 		ObserveTrigMACDInstrument obs = new ObserveTrigMACDInstrument();
 		instrument.addObserver(obs);
 
@@ -113,7 +111,7 @@ public class DownloadZipInstrument {
 		PrintWriter pw=new PrintWriter(new File("price.csv"));
 		for(Price p:instrument.getPriceList()){
 			int index=instrument.getPriceList().indexOf(p);
-			pw.print(p.getPrice()+","+instrument.getMacdList().get(index));
+			pw.print(p.getPrice()+","+instrument.getMacdList().get(index)+","+instrument.getEmaMACDList());
 			pw.print('\n');
 		}
 		pw.close();

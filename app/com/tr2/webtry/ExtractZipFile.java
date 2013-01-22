@@ -11,7 +11,7 @@ import play.Logger;
 
 public class ExtractZipFile {
 	public static void main(String[] args) throws Exception {
-		String fName = "temp/temp.zip";
+		String fName = IConstants.TEMP_PATH;
 		byte[] buf = new byte[1024];
 		ZipInputStream zinstream = new ZipInputStream(
 				new FileInputStream(fName));
@@ -20,7 +20,7 @@ public class ExtractZipFile {
 		while (zentry != null) {
 			String entryName = zentry.getName();
 			System.out.println("Name of  Zip Entry : " + entryName);
-			FileOutputStream outstream = new FileOutputStream("data/"+entryName);
+			FileOutputStream outstream = new FileOutputStream(IConstants.DATA_PATH+entryName);
 			int n;
 
 			while ((n = zinstream.read(buf, 0, 1024)) > -1) {
