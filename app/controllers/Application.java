@@ -10,8 +10,6 @@ import java.util.Set;
 
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.index;
-
 import com.google.gson.Gson;
 import com.tr2.instrument.Instrument;
 import com.tr2.util.DownloadZipInstrument;
@@ -19,9 +17,9 @@ import com.tr2.util.DownloadZipInstrument;
 public class Application extends Controller {
 
 	public static Result index() {
-		return ok(index.render("Your new application is ready."));
+		return ok();
 	}
-
+	
 	public static Result test() {
 		return ok("ammatte");
 	}
@@ -76,10 +74,11 @@ public class Application extends Controller {
 		
 
 		Instrument result = DownloadZipInstrument
-				.getSingleInstrumentGivenDateAndName(startDate, endDate,
+				.getRSIInstrumentGivenDateAndName(startDate, endDate,
 						symbol);
 		//System.out.println(resultMap);
 		return ok(new Gson().toJson(result));
 		// return ok();
 	}
+	
 }

@@ -90,7 +90,7 @@ public class MACDInstrument extends Instrument {
 		double multiplier = 2.0 / (period + 1);
 		int index = priceList.size() - 1;
 
-		return (priceList.get(index).getPrice() - periodMean.get(index - 1))
+		return (priceList.get(index).getClosePrice() - periodMean.get(index - 1))
 				* multiplier + periodMean.get(index - 1);
 
 	}
@@ -100,7 +100,7 @@ public class MACDInstrument extends Instrument {
 		Double tempMean;
 		int length = 0;
 		for (Price price : priceList) {
-			sum += price.getPrice();
+			sum += price.getClosePrice();
 			length++;
 		}
 		tempMean = sum / length;
@@ -112,7 +112,7 @@ public class MACDInstrument extends Instrument {
 		Double tempMean;
 		int length = 0;
 		for (Price price : priceList) {
-			sum += price.getPrice();
+			sum += price.getClosePrice();
 			length++;
 		}
 		tempMean = sum / length;

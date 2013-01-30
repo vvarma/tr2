@@ -6,10 +6,7 @@ import java.util.Observable;
 
 public class Instrument extends Observable{
 
-	/**
-	 * @uml.property  name="priceList"
-	 * @uml.associationEnd  multiplicity="(0 -1)" elementType="com.tr1.instrument.Price"
-	 */
+	
 	protected List<Price> priceList;
 	protected String instrumentName;
 

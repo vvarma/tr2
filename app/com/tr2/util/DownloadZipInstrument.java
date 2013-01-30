@@ -15,6 +15,7 @@ import java.util.Map;
 import play.Logger;
 
 import com.tr2.instrument.Instrument;
+import com.tr2.instrument.InstrumentFactory;
 import com.tr2.instrument.MACDInstrument;
 import com.tr2.instrument.Price;
 import com.tr2.instrument.TrigMACDInstrument;
@@ -26,6 +27,9 @@ import com.tr2.webtry.IConstants;
 
 public class DownloadZipInstrument {
 
+	private static InstrumentFactory factory = new InstrumentFactory();
+
+	@SuppressWarnings("deprecation")
 	public static Map<String, Instrument> getInstrumentGivenDateAndName(
 			Calendar startDate, Calendar endDate, String symbolGroup)
 			throws IOException {
@@ -57,7 +61,7 @@ public class DownloadZipInstrument {
 				}
 
 				for (String i2 : symbolList) {
-					Price instrPrice = new Price(ReadPriceCsv.readPrice(
+					Price instrPrice = new Price(ReadPriceCsv.readClosePrice(
 							fileName, i2), i.getTime());
 					instrumentList.get(i2).addPrice(instrPrice);
 				}
@@ -68,13 +72,15 @@ public class DownloadZipInstrument {
 		obs.close();
 		return instrumentList;
 	}
-	public static  Instrument getSingleInstrumentGivenDateAndName(
+
+	@SuppressWarnings("deprecation")
+	public static Instrument getSingleInstrumentGivenDateAndNameUsingClosePrice(
 			Calendar startDate, Calendar endDate, String symbol)
 			throws IOException {
-		Logger.info("application started ..");
-		
 
-		TrigMACDInstrument instrument =  new TrigMACDInstrument(symbol);
+		Logger.info("application started ..");
+
+		TrigMACDInstrument instrument = new TrigMACDInstrument(symbol);
 		ObserveTrigMACDInstrument obs = new ObserveTrigMACDInstrument();
 		instrument.addObserver(obs);
 
@@ -94,29 +100,90 @@ public class DownloadZipInstrument {
 				}
 
 				
-					Price instrPrice = new Price(ReadPriceCsv.readPrice(
-							fileName, symbol), i.getTime());
-					instrument.addPrice(instrPrice);
-				}
-
+				Price instrPrice = new Price(ReadPriceCsv.readClosePrice(
+						fileName, symbol), i.getTime());
+				instrument.addPrice(instrPrice);
 			}
+
+		}
 		exportToCSV(instrument);
-		
-		//obs.close();
+
+		// obs.close();
 		return instrument;
 	}
 
-	private static void exportToCSV(MACDInstrument instrument) throws IOException {
-		//BufferedWriter bw=new BufferedWriter(new FileWriter(new File("price.csv")));
-		PrintWriter pw=new PrintWriter(new File("price.csv"));
-		for(Price p:instrument.getPriceList()){
-			int index=instrument.getPriceList().indexOf(p);
-			pw.print(p.getPrice()+","+instrument.getMacdList().get(index)+","+instrument.getEmaMACDList());
+	
+	public static Instrument getSingleInstrumentGivenDateAndName(
+			Calendar startDate, Calendar endDate, String symbol)
+			throws IOException {
+		Logger.info("application started ..");
+		Instrument instrument = factory.getInstrument("Simple", symbol);
+		for (Calendar i = startDate; i.before(endDate); i.add(Calendar.DATE, 1)) {
+			String fileName = IConstants.DATA_PATH;
+
+			if (isWeekDay(i)) {
+				String genFileName = createFilenamGivenDate(i);
+				File file = new File(fileName + genFileName);
+				if (file.exists()) {
+					Logger.trace(genFileName + " exists!");
+					fileName = fileName + genFileName;
+				} else {
+					Logger.trace("downloader called.. ");
+					fileName = fileName
+							+ createUrlDownloadAndExtractFileGivenDate(i);
+				}
+
+				
+				instrument.addPrice(ReadPriceCsv.readPrice(fileName, symbol, i.getTime()));
+			}
+
+		}
+		return instrument;
+	}
+	public static Instrument getRSIInstrumentGivenDateAndName(
+			Calendar startDate, Calendar endDate, String symbol)
+			throws IOException {
+		Logger.info("application started ..");
+		Instrument instrument = factory.getInstrument("RSI", symbol);
+		for (Calendar i = startDate; i.before(endDate); i.add(Calendar.DATE, 1)) {
+			String fileName = IConstants.DATA_PATH;
+
+			if (isWeekDay(i)) {
+				String genFileName = createFilenamGivenDate(i);
+				File file = new File(fileName + genFileName);
+				if (file.exists()) {
+					Logger.trace(genFileName + " exists!");
+					fileName = fileName + genFileName;
+				} else {
+					Logger.trace("downloader called.. ");
+					fileName = fileName
+							+ createUrlDownloadAndExtractFileGivenDate(i);
+				}
+
+				
+				instrument.addPrice(ReadPriceCsv.readPrice(fileName, symbol, i.getTime()));
+			}
+
+		}
+		return instrument;
+	}
+
+	private static void exportToCSV(MACDInstrument instrument)
+			throws IOException {
+		// BufferedWriter bw=new BufferedWriter(new FileWriter(new
+		// File("price.csv")));
+		PrintWriter pw = new PrintWriter(new File("price.csv"));
+		for (Price p : instrument.getPriceList()) {
+			int index = instrument.getPriceList().indexOf(p);
+			pw.print(p.getClosePrice() + ","
+					+ instrument.getMacdList().get(index) + ","
+					+ instrument.getEmaMACDList());
 			pw.print('\n');
 		}
 		pw.close();
-		
+
 	}
+
 	public static void getInstrumentGivenDateAndName(Calendar startDate,
 			Calendar endDate) throws IOException {
 		// TODO Auto-generated method stub
@@ -134,8 +201,8 @@ public class DownloadZipInstrument {
 				url = createUrlGivenDate(i);
 				dwnlder.downloadZip(url);
 				fileName = fileName + extractZip.extractTemp();
-				Price instrPrice = new Price(ReadPriceCsv.readPrice(fileName,
-						"ACC"), i.getTime());
+				Price instrPrice = new Price(ReadPriceCsv.readClosePrice(
+						fileName, "ACC"), i.getTime());
 				instr.addPrice(instrPrice);
 			}
 
