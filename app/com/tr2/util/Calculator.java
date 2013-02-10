@@ -17,7 +17,7 @@ public class Calculator {
 		Double result = 0.0;
 
 		for (Price p : instrument.getPriceList())
-			result += p.getPrice();
+			result += p.getClosePrice();
 		result /= instrument.getPriceList().size();
 		//System.out.println(result + "result");
 		return result;
@@ -35,7 +35,7 @@ public class Calculator {
 		Double mean = calculateMean(temp);
 		Double multiplier = (double) (2 / (period + 1));
 		for (Price p : priceList) {
-			mean = (p.getPrice() - mean) * multiplier + mean;
+			mean = (p.getClosePrice() - mean) * multiplier + mean;
 		}
 
 		//System.out.println(mean + "result");

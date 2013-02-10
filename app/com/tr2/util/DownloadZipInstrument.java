@@ -15,7 +15,7 @@ import java.util.Map;
 import play.Logger;
 
 import com.tr2.instrument.Instrument;
-import com.tr2.instrument.MACDInstrument;
+import com.tr2.instrument.AddOnMACDInstrument;
 import com.tr2.instrument.Price;
 import com.tr2.instrument.TrigMACDInstrument;
 import com.tr2.observer.ObserveTrigMACDInstrument;
@@ -57,8 +57,7 @@ public class DownloadZipInstrument {
 				}
 
 				for (String i2 : symbolList) {
-					Price instrPrice = new Price(ReadPriceCsv.readPrice(
-							fileName, i2), i.getTime());
+					Price instrPrice = new Price(ReadPriceCsv.readPrice(fileName, i2), i.getTime());
 					instrumentList.get(i2).addPrice(instrPrice);
 				}
 
@@ -106,12 +105,12 @@ public class DownloadZipInstrument {
 		return instrument;
 	}
 
-	private static void exportToCSV(MACDInstrument instrument) throws IOException {
+	private static void exportToCSV(AddOnMACDInstrument instrument) throws IOException {
 		//BufferedWriter bw=new BufferedWriter(new FileWriter(new File("price.csv")));
 		PrintWriter pw=new PrintWriter(new File("price.csv"));
 		for(Price p:instrument.getPriceList()){
 			int index=instrument.getPriceList().indexOf(p);
-			pw.print(p.getPrice()+","+instrument.getMacdList().get(index)+","+instrument.getEmaMACDList());
+			pw.print(p.getClosePrice()+","+instrument.getMacdList().get(index)+","+instrument.getEmaMACDList());
 			pw.print('\n');
 		}
 		pw.close();

@@ -3,39 +3,59 @@ package com.tr2.instrument;
 import java.util.Date;
 
 public class Price {
-	/**
-	 * @uml.property  name="timeStamp"
-	 */
-	private Date timeStamp;
-	/**
-	 * @uml.property  name="price"
-	 */
-	private Double price;
 
-	public Price(double price, Date date) {
-		timeStamp = date;
-		this.price = price;
+	private Date timeStamp;
+
+	private Double closePrice,openPrice,lowPrice,highPrice,lastClosePrice;
+	
+
+	public Price(Date timeStamp, Double closePrice, Double openPrice,
+			Double lowPrice, Double highPrice, Double lastClosePrice) {
+		super();
+		this.timeStamp = timeStamp;
+		this.closePrice = closePrice;
+		this.openPrice = openPrice;
+		this.lowPrice = lowPrice;
+		this.highPrice = highPrice;
+		this.lastClosePrice = lastClosePrice;
 	}
 
-	/**
-	 * @return
-	 * @uml.property  name="timeStamp"
-	 */
+	@Deprecated
+	public Price(double price, Date date) {
+		timeStamp = date;
+		this.closePrice = price;
+	}
+
+	public Double getOpenPrice() {
+		return openPrice;
+	}
+
+	public Double getLowPrice() {
+		return lowPrice;
+	}
+
+	public Double getHighPrice() {
+		return highPrice;
+	}
+
+	public Double getLastClosePrice() {
+		return lastClosePrice;
+	}
+
 	public Date getTimeStamp() {
 		return timeStamp;
 	}
 
-	/**
-	 * @return
-	 * @uml.property  name="price"
-	 */
-	public Double getPrice() {
-		return price;
+	public Double getClosePrice() {
+		return closePrice;
 	}
 
 	@Override
 	public String toString() {
-		return "Price [timeStamp=" + timeStamp + ", price=" + price + "]";
+		return "Price [timeStamp=" + timeStamp + ", closePrice=" + closePrice
+				+ ", openPrice=" + openPrice + ", lowPrice=" + lowPrice
+				+ ", highPrice=" + highPrice + ", lastClosePrice="
+				+ lastClosePrice + "]";
 	}
 
 }

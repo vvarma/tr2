@@ -2,7 +2,7 @@ package com.tr2.instrument;
 
 import play.Logger;
 
-public class TrigMACDInstrument extends MACDInstrument {
+public class TrigMACDInstrument extends AddOnMACDInstrument {
 
 	protected boolean upOrDown;
 

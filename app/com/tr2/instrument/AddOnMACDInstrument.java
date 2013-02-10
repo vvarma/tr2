@@ -3,7 +3,7 @@ package com.tr2.instrument;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MACDInstrument extends Instrument {
+public class AddOnMACDInstrument extends AbstractDecoratorInstrument {
 
 	protected List<Double> macdList = new ArrayList<Double>();
 	protected List<Double> smallPeriodMean = new ArrayList<Double>();
@@ -15,27 +15,32 @@ public class MACDInstrument extends Instrument {
 		return emaMACDList;
 	}
 
-	// protected Double tempMean;
-	public MACDInstrument(List<Price> priceList) {
-		super(priceList);
-		// TODO Auto-generated constructor stub
-	}
-
-	public MACDInstrument(String string) {
+	public AddOnMACDInstrument(String string) {
 		super(string);
 		// TODO Auto-generated constructor stub
 	}
 
-	public List<Double> getMacdList() {
-		return macdList;
+	@Override
+	public Level generateSignal() {
+		// TODO Auto-generated method stub
+		return super.generateSignal().addLevel(generateMACDSignal());
 	}
 
-	@Override
-	public void addPrice(Price price) {
-		// TODO Auto-generated method stub
-		super.addPrice(price);
+	private Level generateMACDSignal() {
 		updateMACDList();
 		updateEMACDList();
+		if (macdList.get(macdList.size() - 1) > emaMACDList
+				.get(macdList.size() - 1))
+			return Level.BUY;
+		else if (macdList.get(macdList.size() - 1) == emaMACDList.get(macdList
+				.size() - 1))
+			return Level.HOLD;
+		else
+			return Level.SELL;
+	}
+
+	public List<Double> getMacdList() {
+		return macdList;
 	}
 
 	private void updateEMACDList() {
@@ -90,8 +95,8 @@ public class MACDInstrument extends Instrument {
 		double multiplier = 2.0 / (period + 1);
 		int index = priceList.size() - 1;
 
-		return (priceList.get(index).getPrice() - periodMean.get(index - 1))
-				* multiplier + periodMean.get(index - 1);
+		return (priceList.get(index).getClosePrice() - periodMean
+				.get(index - 1)) * multiplier + periodMean.get(index - 1);
 
 	}
 
@@ -100,7 +105,7 @@ public class MACDInstrument extends Instrument {
 		Double tempMean;
 		int length = 0;
 		for (Price price : priceList) {
-			sum += price.getPrice();
+			sum += price.getClosePrice();
 			length++;
 		}
 		tempMean = sum / length;
@@ -112,7 +117,7 @@ public class MACDInstrument extends Instrument {
 		Double tempMean;
 		int length = 0;
 		for (Price price : priceList) {
-			sum += price.getPrice();
+			sum += price.getClosePrice();
 			length++;
 		}
 		tempMean = sum / length;
