@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -14,6 +15,8 @@ import java.util.Map;
 
 import play.Logger;
 
+import com.tr2.instrument.AbstractDecoratorInstrument;
+import com.tr2.instrument.AddOnRSIInstrument;
 import com.tr2.instrument.Instrument;
 import com.tr2.instrument.AddOnMACDInstrument;
 import com.tr2.instrument.Price;
@@ -35,9 +38,9 @@ public class DownloadZipInstrument {
 		Map<String, Instrument> instrumentList = new HashMap<String, Instrument>();
 		ObserveTrigMACDInstrument obs = new ObserveTrigMACDInstrument();
 		for (String i : symbolList) {
-			TrigMACDInstrument tr = new TrigMACDInstrument(i);
-			instrumentList.put(i, tr);
-			tr.addObserver(obs);
+			Instrument instrument=new AddOnRSIInstrument(new Instrument(i));
+			instrumentList.put(i, instrument);
+			instrument.addObserver(obs);
 			// instrumentList.put(i, new Instrument(i));
 		}
 
@@ -67,16 +70,16 @@ public class DownloadZipInstrument {
 		obs.close();
 		return instrumentList;
 	}
-	public static  Instrument getSingleInstrumentGivenDateAndName(
+	public static  AbstractDecoratorInstrument getSingleInstrumentGivenDateAndName(
 			Calendar startDate, Calendar endDate, String symbol)
-			throws IOException {
+			throws IOException, NumberFormatException, ParseException {
 		Logger.info("application started ..");
 		
 
-		TrigMACDInstrument instrument =  new TrigMACDInstrument(symbol);
-		ObserveTrigMACDInstrument obs = new ObserveTrigMACDInstrument();
+		AbstractDecoratorInstrument instrument=new AddOnMACDInstrument(new AddOnRSIInstrument(new Instrument(symbol)));
+		/*ObserveTrigMACDInstrument obs = new ObserveTrigMACDInstrument();
 		instrument.addObserver(obs);
-
+*/
 		for (Calendar i = startDate; i.before(endDate); i.add(Calendar.DATE, 1)) {
 			String fileName = IConstants.DATA_PATH;
 
@@ -88,18 +91,18 @@ public class DownloadZipInstrument {
 					fileName = fileName + genFileName;
 				} else {
 					Logger.trace("downloader called.. ");
-					fileName = fileName
-							+ createUrlDownloadAndExtractFileGivenDate(i);
+					//fileName = fileName	+ createUrlDownloadAndExtractFileGivenDate(i);
 				}
 
-				
-					Price instrPrice = new Price(ReadPriceCsv.readPrice(
-							fileName, symbol), i.getTime());
+				if (file.exists()) {
+					Price instrPrice = ReadPriceCsv.readNewPrice(fileName, symbol);
 					instrument.addPrice(instrPrice);
+				}
+					
 				}
 
 			}
-		exportToCSV(instrument);
+		//exportToCSV(instrument);
 		
 		//obs.close();
 		return instrument;

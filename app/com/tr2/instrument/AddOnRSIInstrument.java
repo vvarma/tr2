@@ -8,8 +8,8 @@ public class AddOnRSIInstrument extends AbstractDecoratorInstrument {
 	private int rsiPeriod = 14;
 	private List<Double> gainList, lossList, rsiList;
 
-	public AddOnRSIInstrument(String string) {
-		super(string);
+	public AddOnRSIInstrument(Instrument instrument) {
+		super(instrument);
 		gainList = new ArrayList<>();
 		lossList = new ArrayList<>();
 		rsiList = new ArrayList<>();
@@ -40,8 +40,9 @@ public class AddOnRSIInstrument extends AbstractDecoratorInstrument {
 			}
 			gainList.add(gainSum / rsiPeriod);
 			lossList.add(lossSum / rsiPeriod);
-			rsiList.add(100 - 100 / (1 + (gainList.get(index - 1) / lossList
-					.get(index - 1))));
+			rsiList.add(0.0);
+			/*rsiList.add(100 - 100 / (1 + (gainList.get(index - 1) / lossList
+					.get(index - 1))));*/
 		} else {
 			Double gain, loss;
 			if (priceList.get(index - 1).getClosePrice() > priceList.get(
@@ -76,4 +77,13 @@ public class AddOnRSIInstrument extends AbstractDecoratorInstrument {
 			return Level.HOLD;
 	}
 
+	@Override
+	public String toString() {
+		super.toString();
+		return "AddOnRSIInstrument [rsiPeriod=" + rsiPeriod + ", gainList="
+				+ gainList + ", lossList=" + lossList + ", rsiList=" + rsiList
+				+ "]";
+	}
+
+	
 }

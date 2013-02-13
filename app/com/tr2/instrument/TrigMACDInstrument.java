@@ -6,8 +6,8 @@ public class TrigMACDInstrument extends AddOnMACDInstrument {
 
 	protected boolean upOrDown;
 
-	public TrigMACDInstrument(String string) {
-		super(string);
+	public TrigMACDInstrument(Instrument instrument) {
+		super(instrument);
 		// TODO Auto-generated constructor stub
 	}
 

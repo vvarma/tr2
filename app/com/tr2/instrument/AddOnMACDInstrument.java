@@ -15,8 +15,8 @@ public class AddOnMACDInstrument extends AbstractDecoratorInstrument {
 		return emaMACDList;
 	}
 
-	public AddOnMACDInstrument(String string) {
-		super(string);
+	public AddOnMACDInstrument(Instrument instrument) {
+		super(instrument);
 		// TODO Auto-generated constructor stub
 	}
 

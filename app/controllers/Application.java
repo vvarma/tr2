@@ -13,6 +13,7 @@ import play.mvc.Result;
 import views.html.index;
 
 import com.google.gson.Gson;
+import com.tr2.instrument.AbstractDecoratorInstrument;
 import com.tr2.instrument.Instrument;
 import com.tr2.util.DownloadZipInstrument;
 
@@ -45,15 +46,14 @@ public class Application extends Controller {
 			}
 		}
 
-		
-
 		Map<String, Instrument> resultMap = DownloadZipInstrument
 				.getInstrumentGivenDateAndName(startDate, endDate,
 						instrCategory);
-		//System.out.println(resultMap);
+		// System.out.println(resultMap);
 		return ok(new Gson().toJson(resultMap));
 		// return ok();
 	}
+
 	public static Result singleInstrument() throws IOException, ParseException {
 		Map<String, String[]> requestParams = request().queryString();
 		Set<String> requestParamsKeys = requestParams.keySet();
@@ -73,12 +73,9 @@ public class Application extends Controller {
 			}
 		}
 
-		
-
 		Instrument result = DownloadZipInstrument
-				.getSingleInstrumentGivenDateAndName(startDate, endDate,
-						symbol);
-		//System.out.println(resultMap);
+				.getSingleInstrumentGivenDateAndName(startDate, endDate, symbol);
+		// System.out.println(result);
 		return ok(new Gson().toJson(result));
 		// return ok();
 	}

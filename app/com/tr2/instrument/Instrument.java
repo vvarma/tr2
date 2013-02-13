@@ -9,7 +9,11 @@ public class Instrument extends Observable {
 	protected List<Price> priceList;
 	protected String instrumentName;
 
-	private Level level=Level.HOLD	;
+	private Level level = Level.HOLD;
+
+	public Instrument() {
+		priceList = new ArrayList<Price>();
+	}
 
 	public Instrument(List<Price> priceList) {
 		super();
@@ -22,8 +26,8 @@ public class Instrument extends Observable {
 	}
 
 	public void generateTrigger() {
-		if(level!=generateSignal()){
-			level=generateSignal();
+		if (level != generateSignal()) {
+			level = generateSignal();
 			setChanged();
 		}
 		if (hasChanged())
@@ -36,7 +40,7 @@ public class Instrument extends Observable {
 	}
 
 	public void addPrice(Price price) {
-		
+
 		priceList.add(price);
 		generateTrigger();
 	}
