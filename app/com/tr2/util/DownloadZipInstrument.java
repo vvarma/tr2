@@ -16,11 +16,11 @@ import java.util.Map;
 import play.Logger;
 
 import com.tr2.instrument.AbstractDecoratorInstrument;
+import com.tr2.instrument.AddOnMACDInstrument;
 import com.tr2.instrument.AddOnRSIInstrument;
 import com.tr2.instrument.Instrument;
-import com.tr2.instrument.AddOnMACDInstrument;
 import com.tr2.instrument.Price;
-import com.tr2.instrument.TrigMACDInstrument;
+import com.tr2.observer.ObserveAbstractInstrument;
 import com.tr2.observer.ObserveTrigMACDInstrument;
 import com.tr2.reader.ReadPriceCsv;
 import com.tr2.webtry.DownloadZip;
@@ -77,9 +77,9 @@ public class DownloadZipInstrument {
 		
 
 		AbstractDecoratorInstrument instrument=new AddOnMACDInstrument(new AddOnRSIInstrument(new Instrument(symbol)));
-		/*ObserveTrigMACDInstrument obs = new ObserveTrigMACDInstrument();
+		ObserveAbstractInstrument obs = new ObserveAbstractInstrument();
 		instrument.addObserver(obs);
-*/
+
 		for (Calendar i = startDate; i.before(endDate); i.add(Calendar.DATE, 1)) {
 			String fileName = IConstants.DATA_PATH;
 
@@ -91,7 +91,7 @@ public class DownloadZipInstrument {
 					fileName = fileName + genFileName;
 				} else {
 					Logger.trace("downloader called.. ");
-					//fileName = fileName	+ createUrlDownloadAndExtractFileGivenDate(i);
+					fileName = fileName	+ createUrlDownloadAndExtractFileGivenDate(i);
 				}
 
 				if (file.exists()) {

@@ -31,7 +31,7 @@ public class Instrument extends Observable {
 			setChanged();
 		}
 		if (hasChanged())
-			notifyObservers();
+			notifyObservers(level);
 	}
 
 	public Level generateSignal() {
