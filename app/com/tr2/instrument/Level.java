@@ -12,9 +12,9 @@ public enum Level {
 			case BUY:
 				return BUY;
 			case HOLD:
-				return HOLD;
+				return BUY;
 			case SELL:
-				return SELL;
+				return HOLD;
 			}
 		case HOLD:
 			switch (level) {
@@ -30,7 +30,7 @@ public enum Level {
 			case BUY:
 				return HOLD;
 			case HOLD:
-				return HOLD;
+				return SELL;
 			case SELL:
 				return SELL;
 			}

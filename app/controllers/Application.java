@@ -13,7 +13,6 @@ import play.mvc.Result;
 import views.html.index;
 
 import com.google.gson.Gson;
-import com.tr2.instrument.AbstractDecoratorInstrument;
 import com.tr2.instrument.Instrument;
 import com.tr2.util.DownloadZipInstrument;
 
@@ -33,6 +32,7 @@ public class Application extends Controller {
 		Calendar startDate = new GregorianCalendar();
 		Calendar endDate = new GregorianCalendar();
 		String instrCategory = "";
+		String[] addOns={"blah"};
 		SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
 		for (String paramsKey : requestParamsKeys) {
 			if (paramsKey.equals("strtDate")) {
@@ -43,12 +43,13 @@ public class Application extends Controller {
 				endDate.setTime(formatter.parse(requestParams.get(paramsKey)[0]));
 			} else if (paramsKey.equals("category")) {
 				instrCategory = requestParams.get(paramsKey)[0];
+			}else if(paramsKey.equals("AddOns")){
+				addOns=requestParams.get(paramsKey)[0].split(",");
 			}
 		}
 
 		Map<String, Instrument> resultMap = DownloadZipInstrument
-				.getInstrumentGivenDateAndName(startDate, endDate,
-						instrCategory);
+				.getInstrumentGivenDateAndName(startDate, endDate,instrCategory,addOns);
 		// System.out.println(resultMap);
 		return ok(new Gson().toJson(resultMap));
 		// return ok();
@@ -60,6 +61,7 @@ public class Application extends Controller {
 		Calendar startDate = new GregorianCalendar();
 		Calendar endDate = new GregorianCalendar();
 		String symbol = "";
+		String[] addOns={"blah"};
 		SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
 		for (String paramsKey : requestParamsKeys) {
 			if (paramsKey.equals("strtDate")) {
@@ -70,11 +72,13 @@ public class Application extends Controller {
 				endDate.setTime(formatter.parse(requestParams.get(paramsKey)[0]));
 			} else if (paramsKey.equals("symbol")) {
 				symbol = requestParams.get(paramsKey)[0];
+			}else if(paramsKey.equals("AddOns")){
+				addOns=requestParams.get(paramsKey)[0].split(",");
 			}
 		}
 
 		Instrument result = DownloadZipInstrument
-				.getSingleInstrumentGivenDateAndName(startDate, endDate, symbol);
+				.getSingleInstrumentGivenDateAndName(startDate, endDate, symbol,addOns);
 		// System.out.println(result);
 		return ok(new Gson().toJson(result));
 		// return ok();

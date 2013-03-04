@@ -11,6 +11,14 @@ public class Instrument extends Observable {
 
 	private Level level = Level.HOLD;
 
+	public Price getCurrentPrice(){
+		int index=priceList.size()-1;
+		return priceList.get(index);
+	}
+	public String getInstrumentName() {
+		return instrumentName;
+	}
+
 	public Instrument() {
 		priceList = new ArrayList<Price>();
 	}
